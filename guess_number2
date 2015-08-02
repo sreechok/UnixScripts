@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# A simple guess game: a number between 1 and 100
+# guess_number2: is using integers but not string as we did it in guess_number
+
+# -i is integer
+# -r is read only variable i.e. like constant
+declare -ir target=$(( ($RANDOM % 100) + 1 ))
+
+declare -i guess=0
+
+printf "Random number is: %d\n" $target
+
+while (( guess != target )); do
+  read -p "Guess a number between 1 and 100: " guess
+
+  # if guess is 0, it was not a number
+  (( guess )) || continue
+
+  if (( guess < target )); then
+    echo "Higher!"	  
+  elif (( guess > target )); then
+    echo "Lower!"
+  else
+    echo "You found it!"
+  fi
+done
+
+exit 0

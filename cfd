@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# check the no. of files in two directories
+
+# check for arguments
+if [[ $# -ne 2 ]]; then
+  echo "$(basename $0): Need exactly 2 arguments"
+  exit 1
+fi
+
+if [[ ! -d $1 ]]; then
+  echo "$1 is not a dir"
+  exit 1
+fi
+
+if [[ ! -d $2 ]]; then
+  echo "$2 is not a dir"
+  exit 1
+fi
+
+
+dir_1="$1"
+dir_2="$2"
+
+count_1=$(ls -Al "$dir_1" | wc -l)
+count_2=$(ls -Al "$dir_2" | wc -l)
+
+if [[ $count_1 -gt $count_2 ]]; then
+  echo "${dir_1} dir has more files"
+elif [[ $count_1 -eq $count_2 ]]; then
+  echo "number of files is equal in both the dirs"
+else
+  echo "${dir_2} dir has more files"
+fi
+
+exit 0
+

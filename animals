@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+# >&2 is equivalent to 1>&2
+[[ $# -ne 1 ]] && { echo "Need one argument" >&2; exit 1; }
+
+word="$1"
+
+case $word in
+	cat) 
+		echo "meow";;
+	dog)
+		echo "bow bow";;
+	cow)
+		echo "moo moo";;
+	*)
+		echo "not an animal";;
+esac

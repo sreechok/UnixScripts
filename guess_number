@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# A simple guess game: a number between 1 and 100
+
+target=$(($RANDOM % 100))
+
+guess=
+
+printf "Random number is: %d\n" $target
+
+while [[ $guess -ne $target ]]; do
+  read -p "Guess a number between 1 and 100: " guess	
+  if [[ $guess -lt $target ]]; then
+    echo "Higher!"	  
+  elif [[ $guess -gt $target ]]; then
+    echo "Lower!"
+  else
+    echo "You found it!"
+  fi
+done
+
+exit 0

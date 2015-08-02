@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# to use && , !, || operators
+
+if [[ $# -eq 1 && $1 = "foo" ]]; then
+  echo "you passed foo"
+else
+  echo "you did not pass enough arguments or passed foo"
+  exit 1
+fi 
+
+exit 0

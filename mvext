@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# move file with $1 (e.g. txt) to $2 (e.g. zip)
+
+[[ $# -ne 2 ]] && {  echo "Need 2 arugments" >&2; exit 1; }
+
+for f in *"$1"; do
+  base=$(basename "$f" "$1")
+  echo mv "$f" "${base}$2"
+done
+
+exit 0

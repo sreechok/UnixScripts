@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# this creates a basic script with permissions etc
+
+# is there an argument?
+if [[ ! $1 ]]; then
+  echo "Argument is missing"
+  exit 1
+fi
+
+scriptname="$1"
+bindir="${HOME}/bin"
+filename="${bindir}/${scriptname}"
+
+# check if the filename exists arleady
+if [[ -e $filename ]]; then
+  echo "$filename already exists"
+  exit 1
+fi
+
+# check if the scriptname exists
+if type "$scriptname" > /dev/null 2>&1; then
+  echo "There is already a command with name ${scriptname}"
+  exit 1
+fi
+
+# check if the bindir exists
+if [[ ! -d $bindir ]]; then
+  if mkdir "$bindir"; then
+    echo "created ${bindir}"
+  else
+    echo "could not create ${bindir}"
+    exit 1
+  fi
+fi
+
+
+# Create a script with a single line
+echo "#!/bin/bash" > "$filename"
+# make script executable
+chmod u+x "$filename"
+if [[ ! $? ]]; then
+  echo "$filename is not executable"
+  exit 1
+fi
+
+# check if the file is executable
+#if [[ ! -x $filename ]]; then
+#  echo "$filename is not executable"
+#  exit 1
+#fi  
+
+# open the new script in your favourite editor
+# check if the EDITOR variable is set 
+if [[ $EDITOR ]]; then
+  $EDITOR "$filename"
+else
+  echo "script created; \$EDITOR variable is not set"
+fi
+
+exit 0
+
