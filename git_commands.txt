@@ -1,0 +1,194 @@
+git config --system
+git config --global --list
+git config --global user.name "sreenivas chokkarapu" 
+git config --global user.email "sreenivas.chokkarapu@gmail.com"
+git config --global core.editor vim
+git config --global core.autocrlf input
+git config --global color.ui auto
+
+
+git add -u
+
+git add -A
+
+git commit -m "message"
+
+git log
+git status
+
+# both are same
+git diff HEAD~1..HEAD
+git diff HEAD~1
+
+git diff 0c87d66a8e..2d5eae74202
+
+# to throw away the local change and get the copy of the last from the repo.
+git checkout file1.txt
+
+# to remove all changes in your working copy
+git reset --hard
+
+# cleaning your working copy`
+# e.g. to remove build generated files
+# will tell what it will do
+git clean -n
+
+# will actually remove the files from your working copy
+git clean -f 
+
+# to ignore files or dirs
+# create a .gitignore file and add what you want to ignore. e.g i want to ignore /logs. this /logs is relative
+from the repository but not actually from the root file system
+# of course we need to add .gitignore file to the repository so that others will get this too.
+
+-----------------------------------------------------------------------------------------------------
+
+working remotely with git
+
+# add remote repo
+git remote -v
+
+# add ssh git repo
+git remote add origin git@github.com:sreechok/UnixScripts.git
+
+# clone a remote repo
+git clone https://github.com/jquery/jquery.git
+cd jquery/
+
+# to get a commit per line
+git log --oneline
+
+# to get graph
+git log --oneline --graph
+
+# -all : all branches, 
+git log --online --graph --all --decorate
+
+# variety of stats
+git log --format=short
+# or the short form is
+git shortlog 
+
+# -sne: s is for summary, n is numerically descreasing, e -> display the email address
+git shortlog -sne
+
+# last commit`
+git show HEAD
+
+git uses 9418 port
+https 80/443
+
+
+# show local branches
+git branch
+
+# to show remote branches
+git branch -r
+
+# to show tags (
+git tag
+
+git@github.com:sreechok/GitFundamentals.git
+
+# set this upstream to origin/master for your local master branch`
+git branch --set-upstream master origin/master
+
+
+I need to add my key to the github/under settings
+
+gpg --gen-key
+
+real name: Sreenivas Chokkarapu
+email: sreenivas.chokkarapu@gmail
+comment: sree chok
+key id: 'Sreenivas Chokkarapu (sree chokk) <sreenivas.chokkarapu@gmail.com>'
+passpharse : choks
+
+# is fetch and merge from remote
+git pull
+
+# push changes back upto the remote
+git push
+
+# to push the tags
+git push --tags
+
+# to create an alias and use it later
+git config --global alias.lga "log --graph --oneline --all --decorate"
+# to use the above alias
+git lga
+
+# create branch feature1
+git branch feature1
+
+# checkout the new branch feature1
+git checkout feature1
+
+git lga
+
+# to checkout master branch 
+git checkout master
+
+# creates a branch fix at commit sha1 0c87d66
+git branch fix1 0c87d66
+
+# checkout the branch fix1
+git checkout fix1
+
+# rename (move: -m) a branch fix1 to bug1234
+git branch -m fix1 bug1234
+git lga
+
+# delete (-d) a branch bug1234
+# Note: it will error it the branch bug1234 is not merged if you try to delete it
+git branch -d bug1234
+
+# to force a branch to delete (-D : captial D)(even if the branch is not merged to master branch)
+git branch -D bug1234
+
+# to create a new branch (-b) feature2 and checkout in one command
+git checkout -b feature2
+
+
+# if you remember we deleted a branch and now we want it back. git remembers it (by default git will keep it for 30 days)
+git reflog
+# you can get back the fix we did
+git branch bug1234 f44d27d
+
+
+git checkout feature2
+
+# if you have changes in your working copy and someone comes to you with an important production bug and had to be fixed; in the working
+# copy there are changes which you don't want to loose. so git allows you to store those changes and the working copy will be clean
+git stash
+
+git status
+
+# to see the stash list
+git stash list
+
+# you want those changes in the stash 
+git checkout feature2
+# to get the changes from the stash
+git stash apply
+# should display the changes we did earlier
+git status
+
+# this stash apply is same as stash pop, but pop -> applies and then removes top item from the list (i.e. this removes from the "stash list")
+git stash pop
+
+
+# creates branch feature2_additional, checksout , then applies changes, and pops from the stash
+git stash branch feature2_additional
+
+
+-------------------
+git checkout feature3
+git rebase master
+git rebase --continue
+git checkout master
+git merge feature3
+-------------------
+
+git cherry-pick sha1
+
