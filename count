@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# using to getops
+
+# this script prints a range of numbers
+# usage: count [-r] [-s n] [-b n] stop
+#-b : begin the count from (defaults: 0)
+#-s : the step count (defaults:1)
+#-r : reverse the print
+
+declare reverse=""
+declare -i step=1
+declare -i start=0
+
+#while getopts "b:s:r" opt; do  # non silent mode "b:s:r"
+while getopts ":b:s:r" opt; do  # non silent mode "b:s:r"
+  case $opt in
+    r)	  
+      reverse="yes"
+      ;;
+    b)
+      [[ ${OPTARG} =~ ^[0-9]+$ ]] || { echo "${OPTARG} is not a number" >&2; exit 2; }
+      start="${OPTARG}"
+      ;;
+    s)
+      [[ ${OPTARG} =~ ^[0-9]+$ ]] || { echo "${OPTARG} is not a number" >&2; exit 2; }
+      step="${OPTARG}"
+      ;;
+    :)
+      echo "Option -${OPTARG} is missing" >&2; 
+      exit 2;
+      ;;
+    \?)
+      echo "Unknown option: -${OPTARG}" >&2	    
+      exit 2;
+      ;;
+  esac	  
+done
+
+echo "OPTIND is now: ${OPTIND}"
+shift $(( OPTIND -1 ))
+
+[[ $1 ]] || { echo "missing an argument" >&2; exit 2; }
+[[ $1 =~ ^[0-9]$ ]] || { echo "$1 is not a number" >&2; exit 2; }
+declare end="$1"
+
+if [[ ! $reverse ]]; then
+  for (( i=start; i <= end; i+=step )); do
+   echo $i
+  done
+else
+  for (( i=end; i >= start; i-=step )); do
+   echo $i
+  done
+fi
+
+exit 0

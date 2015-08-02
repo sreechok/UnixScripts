@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# we need "" when using $@; so always use "$@"
+#for i in "$@"; do
+#  echo $i
+#done 
+
+while [[ $1 ]]; do
+  echo $1
+  shift
+done
+
+exit 0
