@@ -1,0 +1,105 @@
+# to see the string comparsion, file operators to use
+help test
+
+[[ ... ]] is a bash extension
+ - Not a command but a special syntax
+ - No quotes needed around variable
+ - Good habit: use [[ .. ]] instead of [ .. ]
+ 
+# if/elif/fi 
+ if [[ ]]
+   ...
+ elif [[ ]]]
+   ...
+ fi   
+ 
+# conditional (And/Or/Not)
+
+use && for And
+use || for Or
+use ! for not
+
+don't use -a, -o for and, or
+ even though "help test" says so (only we will get into trouble)
+ 
+# return codes
+0 = success, everything else is = failure
+
+# printf, one arg
+printf "hello %s, how are you?\n" $USER
+
+# two args
+printf "hello %s, how are you? your HOME dir is %s\n" $USER $HOME
+
+# formating
+printf "|%20s | %20s | %20s |\n" $(ls)
+
+# to save the output to variable greeting (-v)  instead of printing out
+printf -v greeting "hello %s, how are you?\n" $USER
+echo $greeting
+hello chokkara, how are you?
+
+# here is the assignment to IFS is set only during that line but after the next line it will set to whatever it was
+IFS=: read a b
+
+
+$RANDOM is variable which the OS guess, which we can use in the scripts
+
+while [[ ]]; do
+done
+
+until [[ ]]; do
+done
+
+for var in WORDS; do
+done
+
+# another variant of for
+for (( INIT; TEST; UPDATE )); do
+done
+
+# similar to C language
+break
+continue
+
+# declare an integer variable x
+declare -i x=10
+#print its type
+declare -p x
+
+# delcare and export a integer variable
+declare -x -i var=10
+
+# arrays
+ar=(my name is sreenivas chokkarapu)
+# print the type
+declare -p ar
+ouptuts: declare -a ar='([0]="my" [1]="name" [2]="is" [3]="sreenivas" [4]="chokkarapu")'
+# access array element
+echo ${ar[3]}
+ => sreenivas
+# number of elements in an array
+echo ${#ar[@]} 
+ => 5
+# to display the indices in an array
+echo ${!ar[@]} 
+0 1 2 3 4
+# insert an element in an array ar[15]
+ar[15]=shresta
+# show indices again
+echo ${!ar[@]} 
+0 1 2 3 4 15
+
+# arithemetic expressions
+((  .. ))
+(( ++x ))
+echo $x
+ => 11
+ 
+ # special variables
+   positional parameters: $1, $2 ..$n
+   $0 -> holds the name of the script you're running
+   
+   shift
+   shift 3
+   
