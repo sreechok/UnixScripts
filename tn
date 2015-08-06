@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # get the date
-date=$(date)
+declare -r date=$(date)
 
 # get the topic
-topic="$1"
+declare -r topic="$1"
 
 filename="${HOME}/${topic}notes.txt"
 

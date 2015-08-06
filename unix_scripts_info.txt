@@ -135,3 +135,13 @@ ${var//search/replace} - subsitutes all match in the string
 ${var/#pattern/string} - matches beginning of the string
 ${var/%pattern/string} - matches end of the string
 
+
+# default values
+# the value is not set to the var 
+${var:-value} : will evaluate to "value" if var is empty or unset
+${var-value} : similar, but only if var is unset (you may want sometimes var to hold empty value)
+
+# assign default values
+# the value is set to the var variable
+${var:=value} : will evaluate to "value" if var is empty or unset and assigns it to var
+${var:-value} : similar, but only if var is unset (you may want sometimes var to hold empty value)
