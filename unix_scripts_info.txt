@@ -103,3 +103,35 @@ echo $x
    shift
    shift 3
    
+
+# using history
+!! - to represents the last command you run
+
+# if you want to see what the last cat command was, you can run, which will print that command and add it to the end of your history
+!cat:p
+
+# !$
+
+ represents the arugment from your last command
+mkdir /new/awsome/folder
+cd !$
+
+
+history | grep cucumber
+
+
+# removing a pattern
+${var#pattern} - removes shortest match from begin of string
+${var##pattern} - removes longest match from begin of string
+
+${var%pattern} - removes shortest match from end of string
+${var%%pattern} - removes longest match from end of string
+
+# search and replace
+${var/search/replace} - subsitutes first match in the string
+${var//search/replace} - subsitutes all match in the string
+
+#Anchor your pattern
+${var/#pattern/string} - matches beginning of the string
+${var/%pattern/string} - matches end of the string
+

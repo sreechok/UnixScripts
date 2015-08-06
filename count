@@ -8,40 +8,84 @@
 #-s : the step count (defaults:1)
 #-r : reverse the print
 
+usage() {
+  cat <<END
+count [-r] [-s n] [-b n] stop
+This script prints a range of numbers
+
+Print each number upto stop, beginning at 0
+    -b : begin the count from (defaults: 0)
+    -s : the step count (defaults:1)
+    -r : reverse the print
+    -h : show this help message 
+END
+}
+
+# function to handle errors
+# first argument: error message to print
+# second argument: exit code to exit script with
+error() {
+  echo "Error: $1"
+  usage
+  exit $2
+} >&2
+
+isnum() {
+  declare -r num_re='^[0-9]+$'	
+  declare -r octal_re='^0(.+)'
+  #[[ $1 =~ ^[0-9]+$ ]]
+  num_error="ok"
+  if [[ $1 =~ $num_re ]]; then
+    if [[ $1 =~ $octal_re ]]; then
+      num_error="$1 is not a number, did you mean ${BASH_REMATCH[1]}?"
+      return 1
+    fi
+  else
+    num_error="$1 is not a number"
+    return 1
+  fi
+
+  return 0
+}
+
 declare reverse=""
 declare -i step=1
 declare -i start=0
 
-#while getopts "b:s:r" opt; do  # non silent mode "b:s:r"
-while getopts ":b:s:r" opt; do  # non silent mode "b:s:r"
+#b:s:r -> -b n, -s n, -r [doesn't take anything]
+#while getopts "hb:s:r" opt; do  # silent mode "b:s:r"
+while getopts ":hb:s:r" opt; do  # non silent mode "b:s:r"
   case $opt in
     r)	  
       reverse="yes"
       ;;
     b)
-      [[ ${OPTARG} =~ ^[0-9]+$ ]] || { echo "${OPTARG} is not a number" >&2; exit 2; }
+      isnum ${OPTARG} || error "${num_error}" 1
       start="${OPTARG}"
       ;;
     s)
-      [[ ${OPTARG} =~ ^[0-9]+$ ]] || { echo "${OPTARG} is not a number" >&2; exit 2; }
+      isnum ${OPTARG} || error "${num_error}" 1
       step="${OPTARG}"
       ;;
+    h)
+      usage
+      exit 0
+      ;;
     :)
-      echo "Option -${OPTARG} is missing" >&2; 
-      exit 2;
+      #echo "Option -${OPTARG} is missing" >&2; 
+      error "Option -${OPTARG} is missing an argument" 2 
       ;;
     \?)
-      echo "Unknown option: -${OPTARG}" >&2	    
-      exit 2;
+      error "Unknown option: -${OPTARG}" 3
       ;;
   esac	  
 done
 
 echo "OPTIND is now: ${OPTIND}"
-shift $(( OPTIND -1 ))
+shift $(( OPTIND - 1 ))
 
 [[ $1 ]] || { echo "missing an argument" >&2; exit 2; }
-[[ $1 =~ ^[0-9]$ ]] || { echo "$1 is not a number" >&2; exit 2; }
+isnum $1 || error "${num_error}" 2
 declare end="$1"
 
 if [[ ! $reverse ]]; then

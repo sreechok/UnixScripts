@@ -5,8 +5,10 @@
 [[ $# -ne 2 ]] && {  echo "Need 2 arugments" >&2; exit 1; }
 
 for f in *"$1"; do
-  base=$(basename "$f" "$1")
-  echo mv "$f" "${base}$2"
+  #base=$(basename "$f" "$1")
+  #echo mv "$f" "${base}$2"
+  # -- is added since if there is a filename with -l.txt, then it will not get confused
+  mv -- "$f" "${f/%$1/$2}"
 done
 
 exit 0
