@@ -145,3 +145,5 @@ ${var-value} : similar, but only if var is unset (you may want sometimes var to 
 # the value is set to the var variable
 ${var:=value} : will evaluate to "value" if var is empty or unset and assigns it to var
 ${var:-value} : similar, but only if var is unset (you may want sometimes var to hold empty value)
+
+# this is the end of the course
