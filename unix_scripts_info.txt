@@ -168,7 +168,7 @@ echo $x
 
 # !$
 
- represents the arugment from your last command
+ represents the argument from your last command
 mkdir /new/awsome/folder
 cd !$
 
