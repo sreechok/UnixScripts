@@ -34,6 +34,8 @@ if [[ ! -d $bindir ]]; then
   fi
 fi
 
+# check if the $bindir is writable
+[[ -w $bindir ]] || { echo "The $bindir is not writable by you" >&2; exit 2; }
 
 # Create a script with a single line
 echo "#!/bin/bash" > "$filename"

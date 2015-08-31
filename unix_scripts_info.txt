@@ -1,15 +1,44 @@
 # to see the string comparsion, file operators to use
 help test
 
+
+classical command: "test"
+ - Also: [
+ - harder to use, easier to make mistake
+ - only use for portability
+
 [[ ... ]] is a bash extension
  - Not a command but a special syntax
  - No quotes needed around variable
  - Good habit: use [[ .. ]] instead of [ .. ]
+
+#File test operators
+#type at the prompt for the file test operators
+help test
+or online: http://tldp.org/LDP/abs/html/fto.html
+
+# Arithmetic tests
+[[ arg1 OP arg2 ]]
+  where OP is:
+    -eq: equality
+    -ne: not equal
+    -gt: greater than
+    -lt: less than
+    - don't use =,>,< for numbes as these work on strings.     
+
+# special variables
+ $#: contains number of script arguments
+ $?: contains the exit status of the last command
+
+# get the length of the string in a variable
+  use ${#var}
  
-# if/elif/fi 
+# if/elif/else/fi 
  if [[ ]]
    ...
  elif [[ ]]]
+   ...
+ else
    ...
  fi   
  
@@ -25,8 +54,13 @@ don't use -a, -o for and, or
 # return codes
 0 = success, everything else is = failure
 
-# printf, one arg
+# echo options -e, -n aren't portable so have to use printf
+
+# printf, one arg (by default,printf will not append a newline)
 printf "hello %s, how are you?\n" $USER
+
+# on ubuntu
+man 3 printf
 
 # two args
 printf "hello %s, how are you? your HOME dir is %s\n" $USER $HOME
@@ -39,9 +73,31 @@ printf -v greeting "hello %s, how are you?\n" $USER
 echo $greeting
 hello chokkara, how are you?
 
-# here is the assignment to IFS is set only during that line but after the next line it will set to whatever it was
-IFS=: read a b
+# read
 
+- reads input into a variable
+- read x
+- no variable specified? will use REPLY
+- -s will supress ouptut (useful for passwords)
+- -r : suppresses the escape characters so it always a good to use.
+- -n number: exactly accepts number characters (e.g -n 1: mean will accept only one character)
+read -r -n 1 -s answer
+
+# here is the assignment to IFS is set only during that line but after the next line it will set to whatever it was
+# IFS: Input Field Separator (defaults to space , tab, newline)
+IFS=: read a b
+1:2
+echo $a 
+ 1
+echo $b
+ 2
+
+# Standard streams
+0: stdin
+1: stdout
+2: stderr
+
+- /dev/null discards all data sent to it.
 
 $RANDOM is variable which the OS guess, which we can use in the scripts
 
@@ -147,3 +203,6 @@ ${var:=value} : will evaluate to "value" if var is empty or unset and assigns it
 ${var:-value} : similar, but only if var is unset (you may want sometimes var to hold empty value)
 
 # this is the end of the course
+
+
+
