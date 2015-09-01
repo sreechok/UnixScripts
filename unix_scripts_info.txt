@@ -17,6 +17,11 @@ classical command: "test"
 help test
 or online: http://tldp.org/LDP/abs/html/fto.html
 
+# command groups
+- group commands with {}
+- separate the commands with newlines or semicolons
+- use spaces around braces (important) e.g { cmd1; cmd2; cmdd3; }
+
 # Arithmetic tests
 [[ arg1 OP arg2 ]]
   where OP is:
@@ -25,6 +30,34 @@ or online: http://tldp.org/LDP/abs/html/fto.html
     -gt: greater than
     -lt: less than
     - don't use =,>,< for numbes as these work on strings.     
+
+( the following points from online)
+1. quoting the parameter expansions inside [[ .. ]] and ((...)) is optional. if the variable is not set -gt, -eq will assume
+   a value of 0.
+2. Using $ is optional inside (( ... )) but susing it can help avoid unintentional errors. 
+
+# Arithmetic expressions
+let command
+- let n=100/2
+- ((..))
+ - ((++x))
+ - ((p=x/100))
+ - This ((..)) is a command equivalent to let but this allows us to use spaces within etc.)
+
+- $((..))
+  - this is a substituation, not a command
+  - p=$((x/100))
+- No need to quote variables inside arithmetic expression
+
+---------------------------------------------------------------------------------------
+n=10
+while ((n)); do echo $n; ((n--)); done
+#displays 10 9, 8 (etc on a new line)
+---------------------------------------------------------------------------------------
+
+more info on arthmetic expressions is here:
+http://goo.gl/HnPkiq
+
 
 # special variables
  $#: contains number of script arguments
@@ -118,10 +151,13 @@ done
 break
 continue
 
-# declare an integer variable x
+# declare an integer variable x and assign (if you try to assign an string to an integer variable, bash won't give you error, instead  it will set to 0).
 declare -i x=10
 #print its type
 declare -p x
+
+# unset an attribue with +
+declare +i x
 
 # delcare and export a integer variable
 declare -x -i var=10

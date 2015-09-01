@@ -7,11 +7,11 @@
 word="$1"
 
 case $word in
-	cat) 
+	cat|kitten) 
 		echo "meow";;
-	dog)
+	dog|puppy|pup)
 		echo "bow bow";;
-	cow)
+	cow|calf)
 		echo "moo moo";;
 	*)
 		echo "not an animal";;

@@ -15,7 +15,7 @@ if [[ $note ]]; then
   echo "$date: $note" >> "$filename"
   echo "Added 'note' to $filename"
 else
-  echo "No input from the user"
+  echo "No input from the user" 1>&2
 fi
 
 
