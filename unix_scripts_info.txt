@@ -1,6 +1,5 @@
-# to see the string comparsion, file operators to use
+# To see the string comparsion, file operators to use
 help test
-
 
 classical command: "test"
  - Also: [
@@ -12,8 +11,8 @@ classical command: "test"
  - No quotes needed around variable
  - Good habit: use [[ .. ]] instead of [ .. ]
 
-#File test operators
-#type at the prompt for the file test operators
+# File test operators
+# type at the prompt for the file test operators
 help test
 or online: http://tldp.org/LDP/abs/html/fto.html
 
@@ -212,7 +211,7 @@ cd !$
 history | grep cucumber
 
 
-# removing a pattern
+# Removing a pattern
 ${var#pattern} - removes shortest match from begin of string
 ${var##pattern} - removes longest match from begin of string
 
