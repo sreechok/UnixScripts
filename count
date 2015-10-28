@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# using to getops
+# using getops
 
 # this script prints a range of numbers
 # usage: count [-r] [-s n] [-b n] stop

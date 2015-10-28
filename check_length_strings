@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# check the lengths of the script
+# Get the length of the input strings
 
 if [[ $# -ne 2 ]]; then
   echo "Need exactly 2 arguments"

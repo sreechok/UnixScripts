@@ -7,7 +7,7 @@
 for f in *"$1"; do
   #base=$(basename "$f" "$1")
   #echo mv "$f" "${base}$2"
-  # -- is the end of options switch
+  # -- is the "end of options" switch
   # -- is added since if there is a filename with -l.txt, then it will not get confused
   mv -- "$f" "${f/%$1/$2}"
 done

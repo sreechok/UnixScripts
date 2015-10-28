@@ -1,0 +1,5 @@
+#!/bin/bash
+
+while IFS=: read -r u s ui gi info hd s; do
+  echo $ufin
+done < /etc/passwd

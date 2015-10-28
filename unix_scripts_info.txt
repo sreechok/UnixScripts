@@ -205,7 +205,6 @@ echo $x
 !cat:p
 
 # !$
-
  represents the argument from your last command
 mkdir /new/awsome/folder
 cd !$
@@ -242,5 +241,9 @@ ${var:-value} : similar, but only if var is unset (you may want sometimes var to
 
 # this is the end of the course
 
+for when to use new test [[ and old test [ operator and operators to use.
+http://mywiki.wooledge.org/BashFAQ/031
 
+string >,<,= or (==), !=
+numeric comparsion: -gt, -ge, -lt, -le, -eq, -ne
 

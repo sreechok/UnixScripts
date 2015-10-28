@@ -42,7 +42,7 @@ echo "#!/bin/bash" > "$filename"
 # make script executable
 chmod u+x "$filename"
 if [[ ! $? ]]; then
-  echo "$filename is not executable"
+  echo "chmod failed for some reason, $?"
   exit 1
 fi
 

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 # >&2 is equivalent to 1>&2
 [[ $# -ne 1 ]] && { echo "Need one argument" >&2; exit 1; }
 
@@ -8,11 +7,17 @@ word="$1"
 
 case $word in
 	cat|kitten) 
-		echo "meow";;
+		echo "meow"
+		;;
 	dog|puppy|pup)
-		echo "bow bow";;
+		echo "bow bow"
+		;;
 	cow|calf)
-		echo "moo moo";;
+		echo "moo moo"
+		;;
 	*)
-		echo "not an animal";;
+		echo "not an animal"
+		;;
 esac
+
+exit 0
